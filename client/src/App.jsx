@@ -19,9 +19,11 @@ export default function App() {
     <div>
       <nav className="navbar">
         <div className="container nav-inner">
-          <a href="/" className="brand">
-            <Logo size={28} /> <span>My Portfolio</span>
-          </a>
+          <NavLink to="/" className="brand">
+            <Logo size={28} />
+            <span>My Portfolio</span>
+          </NavLink>
+          
           <div className="nav-links">
             <NavLink to="/" end>Home</NavLink>
             <NavLink to="/about">About</NavLink>
@@ -29,13 +31,13 @@ export default function App() {
             <NavLink to="/education">Education</NavLink>
             <NavLink to="/services">Services</NavLink>
             <NavLink to="/contact">Contact</NavLink>
-            
+
             {/* Show Admin Dashboard only for admins */}
             {isAdmin() && <NavLink to="/admin">Admin</NavLink>}
-            
+
             {/* Auth links */}
             {user ? (
-              <button onClick={signout} className="btn" style={{ padding: '.5rem .75rem' }}>
+              <button onClick={signout} className="btn" style={{ padding: '0.5rem 0.75rem' }}>
                 Logout ({user.name})
               </button>
             ) : (
@@ -58,16 +60,17 @@ export default function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
-          
+
           {/* Protected Admin Route */}
-          <Route 
-            path="/admin" 
+          <Route
+            path="/admin"
             element={
               isAdmin() ? <AdminDashboard /> : <Navigate to="/signin" />
-            } 
+            }
           />
         </Routes>
       </main>
+
       <Footer />
     </div>
   )
